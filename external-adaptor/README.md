@@ -3,17 +3,11 @@
 Some common Image Recognition APIs were listed below, here we implemented the `Imagga` API for our project. The external adaptor is modified based on the Chainlink NodeJS External Adapter Template.
 
 For an extensive library of pre-configured recognition models, and quality handwriting recognition, consider `Google Google CloudVision API`.
-
 For image recognition with celebrity recognition or movement capture, consider `Amazon Rekognition`.
-
 For powerful machine learning from IBM Watson, and a dedicated Food Model, consider `IBM Watson Visual Recognition`.
-
 For similar features plus dominant hue and human-readable content description and categorization, consider `Microsoft Image Processing API`.
-
 For image recognition that includes fashion and food identification, consider `Clarifai`.
-
 **For a more affordable API that focuses on a large quantity of media and digital asset management, and NSFW filters, consider `Imagga`.**
-
 For OCR & NSFW filtering, plus additional file management features like social upload and image transformation, consider `Filestack Processing API`.
 
 
@@ -22,13 +16,13 @@ For OCR & NSFW filtering, plus additional file management features like social u
 This repo is based on the "ExternalAdapterProject"
 
 ```bash
-git clone https://github.com/thodges-gh/CL-EA-NodeJS-Template.git ExternalAdapterProject
+git clone https://github.com/thodges-gh/CL-EA-NodeJS-Template.git deepverse-external-adaptor
 ```
 
 Enter into the newly-created directory
 
 ```bash
-cd ExternalAdapterProject
+cd deepverse-external-adaptor
 ```
 
 You can remove the existing git history by running:
