@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+*.zip
+test/
+.env
+.envrc.example
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.pdf

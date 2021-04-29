@@ -6,8 +6,9 @@ describe('createRequest', () => {
 
   context('successful calls', () => {
     const requests = [
-      { name: 'id not supplied', testData: { data: { image_url: 'https://docs.imagga.com/static/images/docs/sample/japan-605234_1280.jpg' } } },
-      { name: 'base/quote', testData: { id: jobID, data: { image_url: 'https://docs.imagga.com/static/images/docs/sample/japan-605234_1280.jpg' } } },
+      { name: 'id not supplied', testData: { data: { action: 'label', image_url: 'https://deepverse.co.uk/img/orca.jpg' } } },
+      { name: 'label', testData: { id: jobID, data: { action: 'label', image_url: 'https://deepverse.co.uk/img/orca.jpg' } } },
+      { name: 'confidence', testData: { id: jobID, data: { action: 'confidence', image_url: 'https://deepverse.co.uk/img/orca.jpg' } } },
       { name: 'image_url/picture', testData: { id: jobID, data: { from: '' } } },
     ]
 
