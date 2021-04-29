@@ -1,31 +1,25 @@
 # ImageRecognition External Adapter
 
-The external adaptor is modified based on the Chainlink NodeJS External Adapter Template.
+Some common Image Recognition APIs were listed below, here we implemented the `Imagga` API for our project. The external adaptor is modified based on the Chainlink NodeJS External Adapter Template.
 
-Common Image Recognition APIs can be found via https://nordicapis.com/7-best-image-recognition-apis/
+For an extensive library of pre-configured recognition models, and quality handwriting recognition, consider `Google Google CloudVision API`.
 
-For an extensive library of pre-configured recognition models, and quality handwriting recognition, consider `**Google Google CloudVision API**`.
+For image recognition with celebrity recognition or movement capture, consider `Amazon Rekognition`.
 
-For image recognition with celebrity recognition or movement capture, consider `**Amazon Rekognition**`.
+For powerful machine learning from IBM Watson, and a dedicated Food Model, consider `IBM Watson Visual Recognition`.
 
-For powerful machine learning from IBM Watson, and a dedicated Food Model, consider `**IBM Watson Visual Recognition**`.
+For similar features plus dominant hue and human-readable content description and categorization, consider `Microsoft Image Processing API`.
 
-For similar features plus dominant hue and human-readable content description and categorization, consider `**Microsoft Image Processing API**`.
+For image recognition that includes fashion and food identification, consider `Clarifai`.
 
-For image recognition that includes fashion and food identification, consider `**Clarifai**`.
+**For a more affordable API that focuses on a large quantity of media and digital asset management, and NSFW filters, consider `Imagga`.**
 
-For a more affordable API that focuses on a large quantity of media and digital asset management, and NSFW filters, consider `**Imagga**`.
-
-For OCR & NSFW filtering, plus additional file management features like social upload and image transformation, consider `**Filestack Processing API**`.
+For OCR & NSFW filtering, plus additional file management features like social upload and image transformation, consider `Filestack Processing API`.
 
 
-# Chainlink NodeJS External Adapter Template
+# DeepVerse ImageRecognition NodeJS External Adapter 
 
-This template provides a basic framework for developing Chainlink external adapters in NodeJS. Comments are included to assist with development and testing of the external adapter. Once the API-specific values (like query parameters and API key authentication) have been added to the adapter, it is very easy to add some tests to verify that the data will be correctly formatted when returned to the Chainlink node. There is no need to use any additional frameworks or to run a Chainlink node in order to test the adapter.
-
-## Creating your own adapter from this template
-
-Clone this repo and change "ExternalAdapterProject" below to the name of your project
+This repo is based on the "ExternalAdapterProject"
 
 ```bash
 git clone https://github.com/thodges-gh/CL-EA-NodeJS-Template.git ExternalAdapterProject
@@ -47,17 +41,27 @@ See [Install Locally](#install-locally) for a quickstart
 
 ## Input Params
 
-- `base`, `from`, or `coin`: The symbol of the currency to query
-- `quote`, `to`, or `market`: The symbol of the currency to convert to
+- `action`, `label`, or `confidence`: The task going to be performed, return the detected object label and the associated confidence
+- `image_url`: The location of the image
 
 ## Output
-
+action=='label' 
 ```json
 {
  "jobRunID": "278c97ffadb54a5bbb93cfec5f7b5503",
  "data": {
-  "USD": 164.02,
-  "result": 164.02
+  "result":"killer whale" 
+ },
+ "statusCode": 200
+}
+```
+
+action=='confidence'
+```json
+{
+ "jobRunID": "278c97ffadb54a5bbb93cfec5f7b5503",
+ "data": {
+  "result": 70.2778167724609
  },
  "statusCode": 200
 }
@@ -90,8 +94,18 @@ yarn start
 ## Call the external adapter/API server
 
 ```bash
-curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": { "from": "ETH", "to": "USD" } }'
+curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": {"action": "confidence", "image_url": "https://deepverse.co.uk/img/orca.jpg"} }'
 ```
+``
+return: {"jobRunID":0,"data":{"result":70.2778167724609,"status":{"text":"","type":"success"}},"result":70.2778167724609,"statusCode":200}                       
+``
+
+```bash
+curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": {"action": "label", "image_url": "https://deepverse.co.uk/img/orca.jpg"} }'            
+```
+``
+return: {"jobRunID":0,"data":{"result":"killer whale","status":{"text":"","type":"success"}},"result":"killer whale","statusCode":200}%      
+``
 
 ## Docker
 
@@ -114,8 +128,18 @@ After [installing locally](#install-locally):
 ### Create the zip
 
 ```bash
-zip -r external-adapter.zip .
+zip -r deepverse-image-external-adapter.zip .
 ```
+
+### Install to GCP
+
+- In Functions, create a new function, choose to ZIP upload
+- Click Browse and select the `external-adapter.zip` file
+- Select a Storage Bucket to keep the zip in
+- Function to execute: gcpservice
+- Click More, Add variable (repeat for all environment variables)
+  - NAME: API_KEY
+  - VALUE: Your_API_key
 
 ### Install to AWS Lambda
 
@@ -166,13 +190,3 @@ If using a REST API Gateway, you will need to disable the Lambda proxy integrati
 - Click Add Trigger and use the same API Gateway
 - Select the deployment stage and security
 - Click Add
-
-### Install to GCP
-
-- In Functions, create a new function, choose to ZIP upload
-- Click Browse and select the `external-adapter.zip` file
-- Select a Storage Bucket to keep the zip in
-- Function to execute: gcpservice
-- Click More, Add variable (repeat for all environment variables)
-  - NAME: API_KEY
-  - VALUE: Your_API_key
