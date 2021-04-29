@@ -86,19 +86,18 @@ yarn start
 ```
 
 ## Call the external adapter/API server
+```bash
+curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": {"action": "label", "image_url": "https://deepverse.co.uk/img/orca.jpg"} }'            
+```
+``
+sample return: {"jobRunID":0,"data":{"result":"killer whale","status":{"text":"","type":"success"}},"result":"killer whale","statusCode":200}      
+``
 
 ```bash
 curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": {"action": "confidence", "image_url": "https://deepverse.co.uk/img/orca.jpg"} }'
 ```
 ``
-return: {"jobRunID":0,"data":{"result":70.2778167724609,"status":{"text":"","type":"success"}},"result":70.2778167724609,"statusCode":200}                       
-``
-
-```bash
-curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": {"action": "label", "image_url": "https://deepverse.co.uk/img/orca.jpg"} }'            
-```
-``
-return: {"jobRunID":0,"data":{"result":"killer whale","status":{"text":"","type":"success"}},"result":"killer whale","statusCode":200}%      
+sample return: {"jobRunID":0,"data":{"result":70.2778167724609,"status":{"text":"","type":"success"}},"result":70.2778167724609,"statusCode":200}                 
 ``
 
 ## Docker
