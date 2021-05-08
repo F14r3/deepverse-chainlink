@@ -1,7 +1,8 @@
 node_modules/
+remixbackup/
+localfolder/
 package-lock.json
 *.zip
-test/
 .env
 .envrc.example
 *.ppt
